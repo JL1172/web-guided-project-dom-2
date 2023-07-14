@@ -32,6 +32,28 @@ launchButton.addEventListener('click', (evt) => {
             event target: ${evt.target.nodeName}
         `); 
 })
+const all = document.querySelectorAll('*');
+all.forEach(type=> { 
+    type.addEventListener('mouseover',evt=> {
+        console.log(evt.target.nodeName);
+        console.log(evt.type)
+        type.classList.add('blue');
+        console.log('\n')
+        console.log('\n')
+        
+    })
+})
+all.forEach(n=> {
+    n.addEventListener('mouseout', (evt)=> {
+        n.classList.remove('blue');
+    })
+})
+
+document.addEventListener('keydown',(evt)=> {
+    console.log(evt.key); 
+})
+
+
 
 Array.from(document.links).forEach(link => {
     link.addEventListener('click', e=> {
