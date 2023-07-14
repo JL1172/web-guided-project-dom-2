@@ -1,4 +1,4 @@
-console.log('project is up')
+
 
 // 👉 TASK 1- Select the following elements from the DOM:
 
@@ -20,10 +20,10 @@ const modal = document.querySelector('.modal')
 /*this is like <button onclick = "console.log('hello')">*/
 
 //  B- The DOM's element.onclick attribute
-/*launchButton.onclick = () => {
+launchButton.onclick = () => {
     console.log('Oh no, what happened to the html event'); 
     alert('get off the page'); 
-}*/
+}
 //  C- element.addEventListener('click', callback)
 launchButton.addEventListener('click', (evt) => {
     console.log(evt);
@@ -32,6 +32,15 @@ launchButton.addEventListener('click', (evt) => {
             event target: ${evt.target.nodeName}
         `); 
 })
+
+Array.from(document.links).forEach(link => {
+    link.addEventListener('click', e=> {
+        alert(`The ${e.target.textContent} link is not taking you anywhere, send 5 bitcoin to this address sucka`)
+        e.preventDefault(); 
+    })
+}); 
+
+
 /*TODO: ADD EVENT LISTNERS TO LINKS AND PREVENT DEFAULT:::STRETCH*/
 
 // 👉 TASK 3- Create a function that launches!
@@ -40,6 +49,8 @@ launchButton.addEventListener('click', (evt) => {
 function launch() {
     // num += 500; 
      modal.classList.remove('off');
+     successMessage.classList.add('off');
+     failureMessage.classList.add('off'); 
 }
 launchButton.addEventListener('click', launch);
 /*launchButton.addEventListener('click', () => launch(5));*/
@@ -50,7 +61,7 @@ launchButton.addEventListener('click', launch);
 function confirm() {
     modal.classList.add('off');
     successMessage.classList.remove('off'); 
-    failureMessage.classList.add('off'); 
+   
 }
 confirmButton.addEventListener('click', confirm)
 // 👉 TASK 5- Create a function to cancel the launch.
@@ -59,7 +70,7 @@ confirmButton.addEventListener('click', confirm)
 function cancel() {
     modal.classList.add('off');
     failureMessage.classList.remove('off'); 
-    successMessage.classList.add('off');
+   
 }
 cancelButton.addEventListener('click', cancel)
 
@@ -68,15 +79,29 @@ cancelButton.addEventListener('click', cancel)
 // Add it as an event listener for 'keydown' events on document.
 // window.onclick = (evt) => {
 //  alert('get off of the page, click here if you want to')
-
 // }
+function escKey(event) {
+    if (event.key == 'Escape') {
+        modal.classList.add('off');
+    }
+}
+document.addEventListener('keydown', escKey)
 
 // 👉 TASK 7- Add to ALL ELEMENTS ON THE PAGE an event listener for click events.
 // It should console.log the target 🎯 of the event.
 // It should also console.log the CURRENT target 🧭 of the event.
 // Play with stopPropagation and stopImmediatePropagation.
-
-
+// document.querySelectorAll("*").forEach(n=> {
+//     n.addEventListener('click', event => {
+//         console.log('🎯 target:          ', event.target);
+//         console.log('🧭 current target: ', event.currentTarget);
+//         console.log('\n')
+//     })
+// });
+// modal.addEventListener('click', evt => {
+//     console.log('YOU SHALL NOT PASS!');
+//     evt.stopPropagation();
+// })
 // 👉 TASK 8- [STRETCH] Create helper functions to make the code
 // more readable in tasks 3, 4, 5, 6
 function openModal() {
